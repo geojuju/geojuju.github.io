@@ -64,9 +64,9 @@ d3.csv("data.csv", function(error, data) {
   
   
   data.forEach(function(d) {
-	var mystate = d.State;
+	var mystate = d.Row_Labels;
     var y0 = 0;
-	d.ages = color.domain().map(function(name) { return {mystate:mystate, name: name, y0: y0, y1: y0 += +d[name]}; });
+	d.grand_total = color.domain().map(function(name) { return {mystate:mystate, name: name, y0: y0, y1: y0 += +d[name]}; });
 	
     d.total = d.ages[d.ages.length - 1].y1;// the last row	
 	d.pct = [];
