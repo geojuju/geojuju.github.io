@@ -1,6 +1,368 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,hr {margin:0; padding:0;}
+html,body{height:100%;width:100%;overflow:hidden; font-family:Georgia, "Times New Roman", Times, serif; color:#444;}
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,th {font-weight:normal; font-style:normal; font-family:Arial, Helvetica, sans-serif; color:#fff;}
+ul,ol {list-style:none;}
+fieldset,img,hr {border:none; outline:none;}
+caption,th {text-align:left;}
+table {border-collapse:collapse; border-spacing:0;}
+td {vertical-align:top;}
+
+html,body {
+	min-width:750px;
+	margin:auto	
+}
+
+body {
+	background-color:#fff;
+	color:#333;
+	font-size:14px;
+	overflow:hidden;
+}
+
+.claro .dijitContentPane {
+	background:none;
+	padding:0;
+	border:none;
+}
+
+a {
+	color:#555;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+
+#side-pane {
+	width:460px;
+	height:100%;
+	float:left;
+	background-color:black;
+	color:#bababa;
+	font-family:Arial, Helvetica, sans-serif;
+}
+	  
+#header {
+	background:#444;
+	padding:20px;
+}
+
+#title {
+	color:#fff;
+	font-size:20px;
+	font-weight:bold;
+	text-align:left;
+	margin-top:0px;
+}
+
+#subtitle {
+	color:#bababa;
+	font-size:13px;
+	margin-top:10px;
+	overflow: hidden;
+	font-weight:normal;
+}
+
+#instructions {
+	font-size:12px;
+	padding-top:15px;
+	padding-bottom:20px;
+	list-style:disc outside none;
+	margin-left:20px	
+}
+
+#instructions li {
+	padding-top:5px;
+}
+
+#instructions li span {
+	font-weight:bold;
+	color:white;
+}
+
+#social{
+	float:left;
+	margin-top:5px;
+}
+
+#msLink{
+	font-weight:bold;
+	font-size:13px;
+	outline:none;
+	color:#bababa;
+}
+
+#logo{
+	border:none;
+	outline:none;
+	float:left;
+	padding-left:160px;
+}
+
+#logoImg{
+	border:none;
+	outline:none;
+}
+
+#map {
+	position:absolute; /* keep it absolute so it doesn't get knocked down to the next line in float:left situations */
+	border:none;
+	padding:0;
+	height:100%;
+	width:100%;
+	overflow:hidden;
+}
+
+#hoverInfo{
+	line-height:15px;
+
+	font-size:12px;
+	font-family:Verdana, Geneva, sans-serif;
+	position:absolute;
+	padding:10px;
+	max-width:200px;
+	background-color:black;
+	border:#FFFFFF solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-moz-box-shadow: 2px 2px 10px #333;
+	-webkit-box-shadow: 2px 2px 10px #333;
+	box-shadow: 2px 2px 10px #333;
+	filter: progid: DXImageTransform.Microsoft.Shadow(strength = 2, direction = 135, color = '#333333');
+	-ms-filter: "progid: DXImageTransform.Microsoft.Shadow(strength = 2, Direction = 135, Color = '#333333')";
+	overflow:hidden;
+	display:none;
+	z-index:100;
+	color:#FFFFFF;
+}
+
+#zoomToggle{
+	position:absolute;
+	left:15px;
+	top:15px;
+	width:32px;
+	z-index:2;
+	cursor:pointer;
+}
+
+#loaderFrame {
+	position:absolute;
+	top:50%;left:50%;
+	margin-top:-40px;margin-left:-50px;
+	width:100px;
+	text-align:center;
+}
+
+#loader {
+}
+
+#waitMsg {
+	padding-top:20px;
+}
+
+#bar-strip {
+	float:left;
+	width:200px;
+	height:100%;
+	padding-right:20px;
+	padding-top:20px;
+	padding-left:20px;
+}
+
+#swap-container {
+	float:left;
+	padding-left:20px;
+	padding-top:20px;
+	position:relative;
+	overflow:hidden;
+	width:190px;
+	height:100%;
+	background-color:black;
+	color:#bababa;
+	font-family:Arial, Helvetica, sans-serif;
+	border-left-color:gray;
+	border-left-style:solid;
+	border-left-width:thin;
+}
+
+
+/* info-strip stuff */
+
+.info-strip {
+	position:absolute;
+	top:0px;
+	width:190px;
+	height:100%;
+	overflow-y:auto;
+	overflow-x:hidden;
+	background-color:black;
+}
+
+#tornado-info-strip {
+	left:-230px;
+	z-index:11;
+}
+
+#summary-info-strip {
+	left:20px;
+	z-index:10;
+}
+
+.info-strip hr {
+	background-color:#3f3f3f;
+	width:145px;
+	height:1px;
+	margin-top:2px;
+}
+
+.info-strip .superBigGreenText {
+	color: #02acab;
+	font-family:Georgia, 'Times New Roman', Times, serif;
+	font-size:80px;	
+}
+
+.info-strip .infoValue {
+	color:#058eb8;
+	font-size:60px;
+	font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.info-strip .infoCaption {
+	color: #bababa;
+}
+
+.info-strip .title {
+	font-size:22px;
+	color:white;
+}
+
+.info-strip .dateCaption {
+	font-size:14px;
+	color:white;
+}
+
+/* end info-strip stuff */
+
+.esriPopup .sizer {
+	width: 75px;
+}
+
+.esriPopup .actionsPane {
+	border-radius:0px;
+}
+
+/* bar chart */
+
+.barChart {
+	height:100%;
+	width:100%;
+	overflow-y:hidden;
+}
+
+.barChart ul {
+	height:100%;
+	width:100%;
+}
+
+.barChart li {
+	height:100px;
+	width:100%;
+	position:relative;
+}
+
+.barChart .labelDiv {
+	width:50px;
+	position:absolute;
+	overflow:visible;
+}
+
+.barChart li.active .labelDiv {
+	color:#058eb8;
+}
+
+.barChart .barCanvas {
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0px;
+	left:50px;
+}
+
+.barChart .bar {
+	background-color:#3f5f6a;
+	position:absolute;
+	width:0%;
+	cursor:pointer;
+}
+
+.barChart li.active .bar {
+	background-color:#058eb8;
+}
+
+.barChart .x-axis {
+	height:10px;
+	margin-bottom:2px;
+	border: #bababa solid thin;
+	border-bottom:none;
+	margin-left:50px;
+}
+
+.barChart .scaleLabels {
+	color:#bababa;
+	margin-left:50px;
+	width:150px;
+	position:relative;
+}
+
+.barChart #xmin {
+	float:left;
+	width:50%;
+	text-align:left;
+}
+
+.barChart #xmax {
+	float:left;
+	width:50%;
+	text-align:right;
+}
+
+/* end bar chart */
+
+.qtip-light {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	border-width:1px;
+	line-height:15px;
+	background-color:black;
+	color:white;
+}
+
+.qtip-light .qtip-content {
+	padding: 10px;
+}
+
+#search {
+	display: block;
+	position: absolute;
+	z-index: 200;
+	top: 20px;
+	left: 74px;
+}
+
+.infoIcon {
+	width:19px;
+	height:19px;
+	position:absolute; 
+	left:147px;
+	top:-1px;
+}
 
 body {
   font: 10px sans-serif;
