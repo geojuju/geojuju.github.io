@@ -382,32 +382,4 @@ d3.csv("data.csv", function(error, data) {
  
   </style>
 
-  <script>
-    var map;
-    function init(){
-      // initiate leaflet map
-      map = new L.Map('cartodb-map', { 
-        center: [30.267987, -97.743804],
-        zoom: 10
-      })
-      L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-        attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
-      }).addTo(map);
-      var layerUrl = 'https://txbernie.cartodb.com/api/v2/viz/1198cbc6-cf62-11e5-a772-0ea31932ec1d/viz.json';
-      // change the query for the first layer
-      cartodb.createLayer(map, layerUrl)
-        .addTo(map)
-        .on('done', function(layer) {
-          layer.getSubLayer(0).set(subLayerOptions);
-        }).on('error', function() {
-          //log the error
-        });
-    }  
-  </script>
-</head>
-
-<body onload="init()">
-  <div id='cartodb-map'></div>
-</body>
-</script>
-</html>
+  
