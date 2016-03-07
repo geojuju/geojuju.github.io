@@ -1,7 +1,7 @@
-Row Labels	Single Family 	Duplex	Accessory Dwelling Units	Mixed Use	Tri/Fourplex	Multifamily	Grand Total
-2011	 1,514 	 131 	 17 	 24 	 167 	 407 	 2,260 
-2012	 1,804 	 133 	 17 	 24 	 297 	 1,692 	 3,967 
-2013	 2,279 	 246 	 42 	 676 	 81 	 3,510 	 6,834 
-2014	 2,084 	 196 	 100 	 1,316 	 138 	 5,657 	 9,491 
-2015	 523 	 56 	 29 	 7 	 8 	 441 	 1,064 
-Grand Total	 8,204 	 762 	 205 	 2,047 	 691 	 11,707 	 23,616 
+Row Labels,Single Family,Duplex,Accessory Dwelling Units,Mixed Use,Tri/Fourplex,Multifamily	Grand Total
+2011,1514,131,17,24,167,407,2260 
+2012,1804,133,17,24,297,1692,3967 
+2013,2279,246,42,676,81,3510,6834 
+2014,2084,196,100,1316,138,5657,9491 
+2015,523,56,29,7,8,441,1064 
+Grand Total,8204,762,205,2047,691,11707,23616
