@@ -339,5 +339,75 @@ d3.csv("data.csv", function(error, data) {
 		
 	  }
 });
+ </div>
+    </div></bodystyle>
+</a>
+<center>
+</div>
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
+  <![endif]-->
+  <style>
+  .thumb {
+    position: relative;
+}
+.thumb div {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    background: rgba(255,0,0,0.3);
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.thumb img {
+    display: block;
+}
+.thumb div span {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 30px;
+}
+.thumb:hover div {
+    opacity: 1;
+}
+    html, body {width:100%; height:95%; padding: 0; margin: 0;}
+    #cartodb-map { width: 100%; height:95%; background: black;}
+ 
+  </style>
 
+  <script>
+    var map;
+    function init(){
+      // initiate leaflet map
+      map = new L.Map('cartodb-map', { 
+        center: [30.267987, -97.743804],
+        zoom: 10
+      })
+      L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+        attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+      }).addTo(map);
+      var layerUrl = 'https://txbernie.cartodb.com/api/v2/viz/1198cbc6-cf62-11e5-a772-0ea31932ec1d/viz.json';
+      // change the query for the first layer
+      cartodb.createLayer(map, layerUrl)
+        .addTo(map)
+        .on('done', function(layer) {
+          layer.getSubLayer(0).set(subLayerOptions);
+        }).on('error', function() {
+          //log the error
+        });
+    }  
+  </script>
+</head>
+
+<body onload="init()">
+  <div id='cartodb-map'></div>
+</body>
 </script>
+</html>
