@@ -13,4 +13,16 @@
     		nav:false
   }
 });
+	var layers = response.itemInfo.itemData.operationalLayers;
+	var layerInfo = [];        
+		dojo.forEach(layers,function(layer){
+  	if(!layer.featureCollection){
+   		layerInfo.push({"layer":layer.layerObject,"title":layer.title});
+  }
+});
+	var legendDijit = new esri.dijit.Legend({
+	  map:map,
+	  layerInfos:layerInfo
+	},"legendDiv");
+	legendDijit.startup();
 
