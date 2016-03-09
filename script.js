@@ -6,3 +6,11 @@
     		basemap: "gray-vector"
   		});
 	});
+	var mapid="fe9ef6970821469284403bfc72209e4b"
+	var mapDeferred = esri.arcgis.utils.createMap(mapid, "map", {
+  		mapOptions: {
+    		slider: true,
+    		nav:false
+  }
+});
+
