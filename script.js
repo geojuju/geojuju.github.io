@@ -5,3 +5,4 @@
     		zoom: 12,
     		basemap: "gray-vector"
   		});
+	});
