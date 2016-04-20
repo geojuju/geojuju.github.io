@@ -26,6 +26,11 @@ require([
     map: map,  //reference to the map object created before the scene
     zoom: 13,  //sets the zoom level based on level of detail (LOD)
     center: [-97.7462, 30.2681]  //sets the center point of view in lon/lat
+    
+     var tileLayer = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/nzS0F0zdNLvs7nc8/arcgis/rest/services/US_Counties_basemap/MapServer ");
+      map.addLayer(tileLayer);
+
+      var layerUrl ="https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_Counties_Generalized/FeatureServer/0";
   });
 });
 </script>
