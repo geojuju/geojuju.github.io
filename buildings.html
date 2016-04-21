@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Buildings - real world sizes</title>
+
+<link rel="stylesheet" href="https://js.arcgis.com/4.0beta3/esri/css/main.css">
+<script src="https://js.arcgis.com/4.0beta3/"></script>
+
+<style>
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<script>
+require([
+    "esri/Map",
+    "esri/views/SceneView",
+    "esri/layers/FeatureLayer",
+    "esri/geometry/SpatialReference",
+    "esri/geometry/Point",
+    "esri/Camera",
+    "esri/PopupTemplate",
+    "esri/renderers/SimpleRenderer",
+    "esri/symbols/ExtrudeSymbol3DLayer",
+    "esri/symbols/PolygonSymbol3D",
+    "dojo/domReady!"
+  ],
+  function(
+    Map, SceneView, FeatureLayer, SpatialReference, Point, Camera, PopupTemplate, SimpleRenderer, ExtrudeSymbol3DLayer, PolygonSymbol3D
+  ) {
+    
+    var initCam = new Camera({
+      position: new Point({
+        x: -10881000.194799,
+        y: 3536000.799502,
+        z: 400,
+        spatialReference: new SpatialReference({ wkid: 3857 })
+      }),
+      heading: 360,
+      tilt: 80
+    });
+    
+    var renderer = new SimpleRenderer({
+      symbol: new PolygonSymbol3D({
+        symbolLayers: [new ExtrudeSymbol3DLayer({
+          material: { color: [128, 128, 255] }
+        })]
+      }),
+      visualVariables: [
+      {
+        type: "sizeInfo",
+        field: "MAX_HEIGHT",
+        valueUnit: "feet"  //converts and extrudes all data values in feet
+      }, {
+        type: "colorInfo",
+        field: "MAX_HEIGHT",
+        colors: ["white", "orange"],
+        minDataValue: 50,
+        maxDataValue: 500
+      }, {
+        type: "opacityInfo",
+        //field: "MAX_HEIGHT",
+        //minDataValue: 50,
+        //maxDataValue: 500,
+        opacityValues : [ 0.75 ]
+      }
+      ]
+    });
+    var buildingsLyr = new FeatureLayer({
+      url: "http://services.arcgis.com/0L95CJ0VTaxqcmED/ArcGIS/rest/services/STRUCTURE_building_footprints_2013/FeatureServer/0",
+      renderer: renderer,
+      popupTemplate: new PopupTemplate({
+        content: "{*}"
+      }),
+      outFields: ["*"],
+      definitionExpression: "MAX_HEIGHT > 50",
+      elevationInfo: {
+        mode: "onTheGround"
+      }
+    });
+    var map = new Map({
+      basemap: "hybrid"
+    });
+    map.add(buildingsLyr);
+    var view = new SceneView({
+      container: "viewDiv",
+      map: map,
+      camera: initCam
+    });
+  });
+</script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>
